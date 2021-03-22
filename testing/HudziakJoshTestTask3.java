@@ -843,45 +843,6 @@ public class HudziakJoshTestTask3 {
         assertEquals(BigDecimal.valueOf(3), rt.calculate(periodStay));
     }
 
-    /*
-    TEST 18: New Spec Management Rate no charge
-    */
-    @org.junit.Test
-    public void managementRateFree() {
-        Rate rt = new Rate(CarParkKind.MANAGEMENT, BigDecimal.valueOf(5), BigDecimal.valueOf(2), reducedPeriods, normalPeriods);
-        Period periodStay = new Period(10,15);
-        assertEquals(BigDecimal.valueOf(0), rt.calculate(periodStay));
-    }
-
-    /*
-    TEST 19: New Spec Student Rate 25% off
-     */
-    @org.junit.Test
-    public void studentRate() {
-        Rate rt = new Rate(CarParkKind.STUDENT, BigDecimal.valueOf(5), BigDecimal.valueOf(2), reducedPeriods, normalPeriods);
-        Period periodStay = new Period(7,19);
-        assertEquals(BigDecimal.valueOf(8.5), rt.calculate(periodStay));
-    }
-
-    /*
-    TEST 20: New Spec Staff Rate
-     */
-    @org.junit.Test
-    public void staffRate() {
-        Rate rt = new Rate(CarParkKind.STAFF, BigDecimal.valueOf(5), BigDecimal.valueOf(2), reducedPeriods, normalPeriods);
-        Period periodStay = new Period(4,19);
-        assertEquals(BigDecimal.valueOf(16), rt.calculate(periodStay));
-    }
-
-    /*
-    TEST 21: New Spec Staff Rate no charge
-    */
-    @org.junit.Test
-    public void staffRateFree() {
-        Rate rt = new Rate(CarParkKind.STAFF, BigDecimal.valueOf(5), BigDecimal.valueOf(2), reducedPeriods, normalPeriods);
-        Period periodStay = new Period(10,15);
-        assertEquals(BigDecimal.valueOf(0), rt.calculate(periodStay));
-    }
 
 }
 

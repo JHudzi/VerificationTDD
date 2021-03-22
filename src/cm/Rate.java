@@ -3,6 +3,7 @@ package cm;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.math.RoundingMode;
 
 public class Rate {
     private CarParkKind kind;
@@ -10,6 +11,10 @@ public class Rate {
     private BigDecimal hourlyReducedRate;
     private ArrayList<Period> reduced = new ArrayList<>();
     private ArrayList<Period> normal = new ArrayList<>();
+
+    private BigDecimal visitorRateNoCharge = BigDecimal.valueOf(-8);
+    private BigDecimal visitorRateReduced = BigDecimal.valueOf(0.5);
+
 
     public Rate(CarParkKind kind, BigDecimal normalRate, BigDecimal reducedRate, ArrayList<Period> reducedPeriods
             , ArrayList<Period> normalPeriods) {
@@ -91,12 +96,10 @@ public class Rate {
     public BigDecimal calculate(Period periodStay) {
         int normalRateHours = periodStay.occurences(normal);
         int reducedRateHours = periodStay.occurences(reduced);
-        /*return (this.hourlyNormalRate.multiply(BigDecimal.valueOf(normalRateHours))).add(
-                this.hourlyReducedRate.multiply(BigDecimal.valueOf(reducedRateHours))); */
 
         if (this.kind.equals(CarParkKind.VISITOR)) {
-            BigDecimal rate = (BigDecimal.valueOf(0.5).multiply((this.hourlyNormalRate.multiply(BigDecimal.valueOf(normalRateHours))).add
-                    (this.hourlyReducedRate.multiply(BigDecimal.valueOf(reducedRateHours))).add(BigDecimal.valueOf(-8))));
+            BigDecimal rate = (visitorRateReduced.multiply((this.hourlyNormalRate.multiply(BigDecimal.valueOf(normalRateHours))).add
+                    (this.hourlyReducedRate.multiply(BigDecimal.valueOf(reducedRateHours))).add(visitorRateNoCharge)));
 
             return (rate.compareTo(BigDecimal.ZERO) > 0)? rate: BigDecimal.ZERO;
         }
