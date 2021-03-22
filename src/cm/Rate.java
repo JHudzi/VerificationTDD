@@ -14,6 +14,7 @@ public class Rate {
 
     private BigDecimal visitorRateNoCharge = BigDecimal.valueOf(-8);
     private BigDecimal visitorRateReduced = BigDecimal.valueOf(0.5);
+    private BigDecimal managementRateMinCharge = BigDecimal.valueOf(3);
 
 
     public Rate(CarParkKind kind, BigDecimal normalRate, BigDecimal reducedRate, ArrayList<Period> reducedPeriods
@@ -103,8 +104,18 @@ public class Rate {
 
             return (rate.compareTo(BigDecimal.ZERO) > 0)? rate: BigDecimal.ZERO;
         }
+        else if (this.kind.equals(CarParkKind.MANAGEMENT)) {
+
+            BigDecimal rate = (
+                    this.hourlyNormalRate.multiply(BigDecimal.valueOf(normalRateHours)))
+                    .add(this.hourlyReducedRate
+                            .multiply(BigDecimal.valueOf(reducedRateHours)));
+
+            return (rate.compareTo(BigDecimal.valueOf(3)) >= 0) ? rate : managementRateMinCharge;
+        }
+
         return (this.hourlyNormalRate.multiply(BigDecimal.valueOf(normalRateHours))).add
-                (this.hourlyReducedRate.multiply(BigDecimal.valueOf(reducedRateHours)));
+            (this.hourlyReducedRate.multiply(BigDecimal.valueOf(reducedRateHours)));
     }
 
 }

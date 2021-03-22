@@ -842,6 +842,15 @@ public class HudziakJoshTestTask3 {
         Period periodStay = new Period(5,8);
         assertEquals(BigDecimal.valueOf(3), rt.calculate(periodStay));
     }
+    /*
+    TEST 18: New Spec Management Rate no charge
+    */
+    @org.junit.Test
+    public void managementRateFree() {
+        Rate rt = new Rate(CarParkKind.MANAGEMENT, BigDecimal.valueOf(5), BigDecimal.valueOf(2), reducedPeriods, normalPeriods);
+        Period periodStay = new Period(10,15);
+        assertEquals(BigDecimal.valueOf(0), rt.calculate(periodStay));
+    }
 
 
 }
