@@ -3,7 +3,6 @@ package cm;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import java.math.RoundingMode;
 
 public class Rate {
     private CarParkKind kind;
@@ -14,8 +13,10 @@ public class Rate {
 
     private BigDecimal visitorRateNoCharge = BigDecimal.valueOf(-8);
     private BigDecimal visitorRateReduced = BigDecimal.valueOf(0.5);
-    private BigDecimal managementRateMinCharge = BigDecimal.valueOf(3);
-
+    private BigDecimal managementRateMin = BigDecimal.valueOf(3);
+    private BigDecimal studentOverallReduction = BigDecimal.valueOf(0.25);
+    private BigDecimal studentRegPrice = BigDecimal.valueOf(5.50);
+    private BigDecimal staffRateMax = BigDecimal.valueOf(16);
 
     public Rate(CarParkKind kind, BigDecimal normalRate, BigDecimal reducedRate, ArrayList<Period> reducedPeriods
             , ArrayList<Period> normalPeriods) {
@@ -111,11 +112,46 @@ public class Rate {
                     .add(this.hourlyReducedRate
                             .multiply(BigDecimal.valueOf(reducedRateHours)));
 
-            return (rate.compareTo(BigDecimal.valueOf(3)) >= 0) ? rate : managementRateMinCharge;
+            if (rate.compareTo(BigDecimal.valueOf(3)) > 0){
+                return rate;
+            }
+            else if(rate.compareTo(BigDecimal.ZERO) == 0)
+            {
+                return BigDecimal.ZERO;
+            }
+            else {
+                return managementRateMin;
+                }
+        }
+        else if (this.kind.equals(CarParkKind.STUDENT)){
+            BigDecimal rate = this.hourlyNormalRate
+                    .multiply(BigDecimal.valueOf(normalRateHours))
+                    .add(this.hourlyReducedRate
+                            .multiply(BigDecimal.valueOf(reducedRateHours)));
+            if (rate.compareTo(studentRegPrice) > 0) {
+                rate =  studentRegPrice.add(((
+                                (this.hourlyNormalRate.multiply(BigDecimal.valueOf(normalRateHours)))
+                                        .add(this.hourlyReducedRate
+                                                .multiply(BigDecimal.valueOf(reducedRateHours))))
+                                .subtract(studentRegPrice))
+                                .subtract((((this.hourlyNormalRate.multiply(BigDecimal.valueOf(normalRateHours)))
+                                        .add(this.hourlyReducedRate.multiply(BigDecimal.valueOf(reducedRateHours))))
+                                        .subtract(studentRegPrice))
+                                        .multiply(studentOverallReduction)));
+            }
+
+            return (rate.compareTo(BigDecimal.ZERO) > 0) ? rate : BigDecimal.ZERO;
         }
 
-        return (this.hourlyNormalRate.multiply(BigDecimal.valueOf(normalRateHours))).add
-            (this.hourlyReducedRate.multiply(BigDecimal.valueOf(reducedRateHours)));
+        if (this.kind.equals(CarParkKind.STAFF)) {
+            BigDecimal rate = this.hourlyNormalRate
+                    .multiply(BigDecimal.valueOf(normalRateHours))
+                    .add(this.hourlyReducedRate
+                            .multiply(BigDecimal.valueOf(reducedRateHours)));
+            return (rate.compareTo(BigDecimal.valueOf(16)) <= 0) ? rate : staffRateMax;
+        }
+
+        return BigDecimal.ZERO;
     }
 
 }
