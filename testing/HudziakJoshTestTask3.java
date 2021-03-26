@@ -8,6 +8,8 @@ import java.util.ArrayList;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertTrue;
+
 
 /*
  *
@@ -185,8 +187,8 @@ public class HudziakJoshTestTask3 {
     /*
     TEST 13: reducedRate == 0
      */
-    @org.junit.Test(expected = IllegalArgumentException.class)
-    public void reducedRateEqualZero() throws Exception {
+    @org.junit.Test
+    public void reducedRateEqualZero() {
         Rate rt = new Rate(CarParkKind.STUDENT, BigDecimal.valueOf(5), BigDecimal.valueOf(0), reducedPeriods, normalPeriods);
     }
     /*
@@ -676,7 +678,7 @@ public class HudziakJoshTestTask3 {
     public void firstPeriodNormalPeriodBound() {
         Rate rt = new Rate(CarParkKind.STUDENT, BigDecimal.valueOf(3), BigDecimal.valueOf(2), reducedPeriodsCC1, normalPeriodsCC1);
         Period periodStay = new Period(0,1);
-        assertEquals(BigDecimal.valueOf(3), rt.calculate(periodStay));
+        assertTrue(BigDecimal.valueOf(3.00).compareTo(rt.calculate(periodStay)) == 0);
 
     }
 
@@ -687,7 +689,7 @@ public class HudziakJoshTestTask3 {
     public void lastPeriodNormalPeriodBound() {
         Rate rt = new Rate(CarParkKind.STUDENT, BigDecimal.valueOf(3), BigDecimal.valueOf(2), reducedPeriodsCC1, normalPeriodsCC1);
         Period periodStay = new Period(23,24);
-        assertEquals(BigDecimal.valueOf(3), rt.calculate(periodStay));
+        assertTrue(BigDecimal.valueOf(3.00).compareTo(rt.calculate(periodStay)) == 0);
 
     }
 
@@ -698,7 +700,7 @@ public class HudziakJoshTestTask3 {
     public void firstPeriodReducedPeriodBound() {
         Rate rt = new Rate(CarParkKind.STUDENT, BigDecimal.valueOf(3), BigDecimal.valueOf(2), reducedPeriodsCC2, normalPeriodsCC2);
         Period periodStay = new Period(0,1);
-        assertEquals(BigDecimal.valueOf(2), rt.calculate(periodStay));
+        assertTrue(BigDecimal.valueOf(2.00).compareTo(rt.calculate(periodStay)) == 0);
 
     }
 
@@ -709,7 +711,7 @@ public class HudziakJoshTestTask3 {
     public void lastPeriodReducedPeriodBound() {
         Rate rt = new Rate(CarParkKind.STUDENT, BigDecimal.valueOf(3), BigDecimal.valueOf(2), reducedPeriodsCC2, normalPeriodsCC2);
         Period periodStay = new Period(23,24);
-        assertEquals(BigDecimal.valueOf(2), rt.calculate(periodStay));
+        assertTrue(BigDecimal.valueOf(2.00).compareTo(rt.calculate(periodStay)) == 0);
 
     }
 
@@ -720,7 +722,7 @@ public class HudziakJoshTestTask3 {
     public void arbitraryPeriodNormalRate() {
         Rate rt = new Rate(CarParkKind.STUDENT, BigDecimal.valueOf(3), BigDecimal.valueOf(2), reducedPeriodsCC2, normalPeriodsCC2);
         Period periodStay = new Period(14,17);
-        assertEquals(BigDecimal.valueOf(8.125), rt.calculate(periodStay));
+        assertEquals(BigDecimal.valueOf(8.13), rt.calculate(periodStay));
     }
 
     /*
@@ -730,7 +732,7 @@ public class HudziakJoshTestTask3 {
     public void firstNormalPeriod() {
         Rate rt = new Rate(CarParkKind.STUDENT, BigDecimal.valueOf(4), BigDecimal.valueOf(1), reducedPeriodsCC3, normalPeriodsCC3);
         Period periodStay = new Period(2,4);
-        assertEquals(BigDecimal.valueOf(7.375), rt.calculate(periodStay));
+        assertEquals(BigDecimal.valueOf(7.38), rt.calculate(periodStay));
     }
 
     /*
@@ -740,7 +742,7 @@ public class HudziakJoshTestTask3 {
     public void lastNormalPeriod() {
         Rate rt = new Rate(CarParkKind.STUDENT, BigDecimal.valueOf(4), BigDecimal.valueOf(1), reducedPeriodsCC3, normalPeriodsCC3);
         Period periodStay = new Period(17,19);
-        assertEquals(BigDecimal.valueOf(7.375), rt.calculate(periodStay));
+        assertEquals(BigDecimal.valueOf(7.38), rt.calculate(periodStay));
     }
 
     /*
@@ -750,7 +752,7 @@ public class HudziakJoshTestTask3 {
     public void arbitraryPeriodReducedRate() {
         Rate rt = new Rate(CarParkKind.STUDENT, BigDecimal.valueOf(4), BigDecimal.valueOf(1), reducedPeriodsCC3, normalPeriodsCC3);
         Period periodStay = new Period(14,17);
-        assertEquals(BigDecimal.valueOf(3), rt.calculate(periodStay));
+        assertTrue(BigDecimal.valueOf(3.00).compareTo(rt.calculate(periodStay)) == 0);
     }
 
     /*
@@ -760,7 +762,7 @@ public class HudziakJoshTestTask3 {
     public void normalPeriodAndFreePeriod() {
         Rate rt = new Rate(CarParkKind.STUDENT, BigDecimal.valueOf(3), BigDecimal.valueOf(2), reducedPeriodsCC3, normalPeriodsCC3);
         Period periodStay = new Period(18,20);
-        assertEquals(BigDecimal.valueOf(3), rt.calculate(periodStay));
+        assertTrue(BigDecimal.valueOf(3.00).compareTo(rt.calculate(periodStay)) == 0);
     }
 
     /*
@@ -770,7 +772,7 @@ public class HudziakJoshTestTask3 {
     public void normalPeriodAndReducedPeriod() {
         Rate rt = new Rate(CarParkKind.STUDENT, BigDecimal.valueOf(3), BigDecimal.valueOf(2), reducedPeriodsCC3, normalPeriodsCC3);
         Period periodStay = new Period(1,3);
-        assertEquals(BigDecimal.valueOf(5), rt.calculate(periodStay));
+        assertTrue(BigDecimal.valueOf(5.00).compareTo(rt.calculate(periodStay)) == 0);
     }
 
     /*
@@ -780,7 +782,7 @@ public class HudziakJoshTestTask3 {
     public void reducedPeriodAndFreePeriod() {
         Rate rt = new Rate(CarParkKind.STUDENT, BigDecimal.valueOf(3), BigDecimal.valueOf(2), reducedPeriodsCC3, normalPeriodsCC3);
         Period periodStay = new Period(12,14);
-        assertEquals(BigDecimal.valueOf(2), rt.calculate(periodStay));
+        assertTrue(BigDecimal.valueOf(2.00).compareTo(rt.calculate(periodStay)) == 0);
     }
 
     /*
@@ -790,7 +792,7 @@ public class HudziakJoshTestTask3 {
     public void normalReducedFreePeriod() {
         Rate rt = new Rate(CarParkKind.STUDENT, BigDecimal.valueOf(3), BigDecimal.valueOf(2), reducedPeriodsCC3, normalPeriodsCC3);
         Period periodStay = new Period(16,20);
-        assertEquals(BigDecimal.valueOf(7.375), rt.calculate(periodStay));
+        assertEquals(BigDecimal.valueOf(7.38), rt.calculate(periodStay));
     }
 
     /*
@@ -810,7 +812,7 @@ public class HudziakJoshTestTask3 {
     public void visitorRateAll() {
         Rate rt = new Rate(CarParkKind.VISITOR, BigDecimal.valueOf(5), BigDecimal.valueOf(2), reducedPeriods, normalPeriods);
         Period periodStay = new Period(7,20);
-        assertEquals(BigDecimal.valueOf(3.50), rt.calculate(periodStay));
+        assertTrue(BigDecimal.valueOf(3.50).compareTo(rt.calculate(periodStay)) == 0);
     }
 
     /*
@@ -840,7 +842,7 @@ public class HudziakJoshTestTask3 {
     public void managementRate() {
         Rate rt = new Rate(CarParkKind.MANAGEMENT, BigDecimal.valueOf(5), BigDecimal.valueOf(2), reducedPeriods, normalPeriods);
         Period periodStay = new Period(5,8);
-        assertEquals(BigDecimal.valueOf(3), rt.calculate(periodStay));
+        assertEquals(BigDecimal.valueOf(3.00), rt.calculate(periodStay));
     }
     /*
     TEST 17: New Spec Management Rate min 3 payable
@@ -849,7 +851,7 @@ public class HudziakJoshTestTask3 {
     public void managementRateOver3() {
         Rate rt = new Rate(CarParkKind.MANAGEMENT, BigDecimal.valueOf(5), BigDecimal.valueOf(2), reducedPeriods, normalPeriods);
         Period periodStay = new Period(2,5);
-        assertEquals(BigDecimal.valueOf(15), rt.calculate(periodStay));
+        assertTrue(BigDecimal.valueOf(15.00).compareTo(rt.calculate(periodStay)) == 0);
     }
     /*
     TEST 18: New Spec Management Rate no charge
@@ -868,7 +870,7 @@ public class HudziakJoshTestTask3 {
     public void studentRateAboveRegPrice() {
         Rate rt = new Rate(CarParkKind.STUDENT, BigDecimal.valueOf(5), BigDecimal.valueOf(2), reducedPeriods, normalPeriods);
         Period periodStay = new Period(7,19);
-        assertEquals(BigDecimal.valueOf(8.875), rt.calculate(periodStay));
+        assertEquals(BigDecimal.valueOf(8.88), rt.calculate(periodStay));
     }
 
     /*
@@ -878,7 +880,7 @@ public class HudziakJoshTestTask3 {
     public void studentRateBelowRegPrice() {
         Rate rt = new Rate(CarParkKind.STUDENT, BigDecimal.valueOf(5), BigDecimal.valueOf(2), reducedPeriods, normalPeriods);
         Period periodStay = new Period(7,19);
-        assertEquals(BigDecimal.valueOf(8.875), rt.calculate(periodStay));
+        assertEquals(BigDecimal.valueOf(8.88), rt.calculate(periodStay));
     }
 
     /*
@@ -898,7 +900,7 @@ public class HudziakJoshTestTask3 {
     public void staffRate() {
         Rate rt = new Rate(CarParkKind.STAFF, BigDecimal.valueOf(5), BigDecimal.valueOf(2), reducedPeriods, normalPeriods);
         Period periodStay = new Period(1,15);
-        assertEquals(BigDecimal.valueOf(16), rt.calculate(periodStay));
+        assertEquals(BigDecimal.valueOf(16.00), rt.calculate(periodStay));
     }
 
     /*
@@ -908,7 +910,7 @@ public class HudziakJoshTestTask3 {
     public void staffRateFree() {
         Rate rt = new Rate(CarParkKind.STAFF, BigDecimal.valueOf(5), BigDecimal.valueOf(2), reducedPeriods, normalPeriods);
         Period periodStay = new Period(10,15);
-        assertEquals(BigDecimal.valueOf(0), rt.calculate(periodStay));
+        assertTrue(BigDecimal.valueOf(0).compareTo(rt.calculate(periodStay)) == 0);
     }
 
 }
