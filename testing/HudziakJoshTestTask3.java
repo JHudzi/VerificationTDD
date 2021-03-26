@@ -845,7 +845,7 @@ public class HudziakJoshTestTask3 {
         assertEquals(BigDecimal.valueOf(3.00), rt.calculate(periodStay));
     }
     /*
-    TEST 17: New Spec Management Rate min 3 payable
+    TEST 18: New Spec Management Rate min 3 payable
     */
     @org.junit.Test
     public void managementRateOver3() {
@@ -854,7 +854,7 @@ public class HudziakJoshTestTask3 {
         assertTrue(BigDecimal.valueOf(15.00).compareTo(rt.calculate(periodStay)) == 0);
     }
     /*
-    TEST 18: New Spec Management Rate no charge
+    TEST 19: New Spec Management Rate no charge
     */
     @org.junit.Test
     public void managementRateFree() {
@@ -864,7 +864,7 @@ public class HudziakJoshTestTask3 {
     }
 
     /*
-    TEST 19: New Spec Student Rate 25% off
+    TEST 20: New Spec Student Rate 25% off
      */
     @org.junit.Test
     public void studentRateAboveRegPrice() {
@@ -874,17 +874,17 @@ public class HudziakJoshTestTask3 {
     }
 
     /*
-    TEST 20: New Spec Student Rate 25% off
+    TEST 21: New Spec Student Below Regular Price
      */
     @org.junit.Test
     public void studentRateBelowRegPrice() {
         Rate rt = new Rate(CarParkKind.STUDENT, BigDecimal.valueOf(5), BigDecimal.valueOf(2), reducedPeriods, normalPeriods);
-        Period periodStay = new Period(7,19);
-        assertEquals(BigDecimal.valueOf(8.88), rt.calculate(periodStay));
+        Period periodStay = new Period(2,3);
+        assertTrue(BigDecimal.valueOf(5.00).compareTo(rt.calculate(periodStay)) == 0);
     }
 
     /*
-    TEST 21: New Spec Student Rate 25% off
+    TEST 22: New Spec Student Rate 25% off
      */
     @org.junit.Test
     public void studentRateFree() {
@@ -894,7 +894,7 @@ public class HudziakJoshTestTask3 {
     }
 
     /*
-    TEST 22: New Spec Staff Rate
+    TEST 23: New Spec Staff Rate
      */
     @org.junit.Test
     public void staffRate() {
@@ -904,7 +904,7 @@ public class HudziakJoshTestTask3 {
     }
 
     /*
-    TEST 23: New Spec Staff Rate no charge
+    TEST 24: New Spec Staff Rate no charge
     */
     @org.junit.Test
     public void staffRateFree() {
